@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import * as S from './styles';
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
@@ -11,7 +12,7 @@ export default function Home() {
       </S.InputSearchContainer>
       <S.Header>
         <strong>3 Contatos</strong>
-        <a href="/" alt="link">Novo contato</a>
+        <Link href="/" alt="link">Novo contato</Link>
       </S.Header>
 
       <S.ListContainer>
@@ -32,47 +33,9 @@ export default function Home() {
             <span>(33) 99999-9999</span>
           </div>
           <div className="actions">
-            <a href="/">
+            <Link to="/edit/123">
               <img src={edit} alt="editar" />
-            </a>
-            <button type="button">
-              <img src={trash} alt="remover" />
-            </button>
-          </div>
-        </S.Card>
-
-        <S.Card>
-          <div className="info">
-            <div className="contact-name">
-              <strong>Mateus Silva</strong>
-              <small>Instagram</small>
-            </div>
-            <span>mateus@devacademy.com.br</span>
-            <span>(33) 99999-9999</span>
-          </div>
-          <div className="actions">
-            <a href="/">
-              <img src={edit} alt="editar" />
-            </a>
-            <button type="button">
-              <img src={trash} alt="remover" />
-            </button>
-          </div>
-        </S.Card>
-
-        <S.Card>
-          <div className="info">
-            <div className="contact-name">
-              <strong>Mateus Silva</strong>
-              <small>Instagram</small>
-            </div>
-            <span>mateus@devacademy.com.br</span>
-            <span>(33) 99999-9999</span>
-          </div>
-          <div className="actions">
-            <a href="/">
-              <img src={edit} alt="editar" />
-            </a>
+            </Link>
             <button type="button">
               <img src={trash} alt="remover" />
             </button>
