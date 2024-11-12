@@ -15,19 +15,21 @@ export default function Home() {
 
   const filteredContacts = useMemo(
     () =>
-      contacts.filter((contact) => contact.name.toLowerCase().includes(searchTerm.toLowerCase())),
+      contacts.filter(contact =>
+        contact.name.toLowerCase().includes(searchTerm.toLowerCase()),
+      ),
     [contacts, searchTerm],
   );
 
   useEffect(() => {
     setIsLoading(true);
     fetch(`http://localhost:3130/contacts?orderBy=${orderBy}`)
-      .then(async (response) => {
+      .then(async response => {
         await delay(300);
         const data = await response.json();
         setContacts(data);
       })
-      .catch((error) => {
+      .catch(error => {
         const message = error;
         return message;
       })
@@ -37,10 +39,10 @@ export default function Home() {
   }, [orderBy]);
 
   const handleToggleOrderBy = () => {
-    setOrderBy((prev) => (prev === 'asc' ? 'desc' : 'asc'));
+    setOrderBy(prev => (prev === 'asc' ? 'desc' : 'asc'));
   };
 
-  const handleChangeSearchTerm = (event) => {
+  const handleChangeSearchTerm = event => {
     setSearchTerm(event.target.value);
   };
 
@@ -68,14 +70,18 @@ export default function Home() {
 
       {filteredContacts.length > 0 && (
         <S.ListHeader orderBy={orderBy}>
-          <button type="button" className="sort-button" onClick={handleToggleOrderBy}>
+          <button
+            type="button"
+            className="sort-button"
+            onClick={handleToggleOrderBy}
+          >
             <span>Nome</span>
             <img src={arrow} alt="arrow" />
           </button>
         </S.ListHeader>
       )}
 
-      {filteredContacts.map((contact) => (
+      {filteredContacts.map(contact => (
         <S.Card key={contact.id}>
           <div className="info">
             <div className="contact-name">

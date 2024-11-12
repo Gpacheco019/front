@@ -15,11 +15,12 @@ export default function ContactForm({ buttonLabel }) {
   const [phone, setPhone] = useState('');
   const [category, setCategory] = useState('');
 
-  const { getErrorMessageByFieldName, removeError, setError, errors } = useErrors();
+  const { getErrorMessageByFieldName, removeError, setError, errors } =
+    useErrors();
 
   const isFormValid = name && errors.length === 0;
 
-  const handleNameChange = (event) => {
+  const handleNameChange = event => {
     setName(event.target.value);
 
     if (!event.target.value) {
@@ -29,7 +30,7 @@ export default function ContactForm({ buttonLabel }) {
     }
   };
 
-  const handleEmailChange = (event) => {
+  const handleEmailChange = event => {
     setEmail(event.target.value);
 
     if (event.target.value && !isEmailValid(event.target.value)) {
@@ -39,11 +40,11 @@ export default function ContactForm({ buttonLabel }) {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
   };
 
-  const handlePhoneChange = (event) => {
+  const handlePhoneChange = event => {
     setPhone(formatPhone(event.target.value));
   };
 
@@ -69,11 +70,19 @@ export default function ContactForm({ buttonLabel }) {
       </FormGroup>
 
       <FormGroup>
-        <Input placeholder="Telefone" value={phone} onChange={handlePhoneChange} maxLength="15" />
+        <Input
+          placeholder="Telefone"
+          value={phone}
+          onChange={handlePhoneChange}
+          maxLength="15"
+        />
       </FormGroup>
 
       <FormGroup>
-        <Select value={category} onChange={(event) => setCategory(event.target.value)}>
+        <Select
+          value={category}
+          onChange={event => setCategory(event.target.value)}
+        >
           <option value="">Categoria</option>
           <option value="instagram">Instagram</option>
           <option value="facebook">Facebook</option>
