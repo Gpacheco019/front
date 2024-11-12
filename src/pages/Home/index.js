@@ -1,41 +1,92 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
 import * as S from './styles';
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
 import Loader from '../../components/Loader';
+import delay from '../../utils/delay';
 
 export default function Home() {
+  const [contacts, setContacts] = useState([]);
+  const [orderBy, setOrderBy] = useState('asc');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  const filteredContacts = useMemo(
+    () =>
+      contacts.filter((contact) => contact.name.toLowerCase().includes(searchTerm.toLowerCase())),
+    [contacts, searchTerm],
+  );
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetch(`http://localhost:3130/contacts?orderBy=${orderBy}`)
+      .then(async (response) => {
+        await delay(300);
+        const data = await response.json();
+        setContacts(data);
+      })
+      .catch((error) => {
+        const message = error;
+        return message;
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [orderBy]);
+
+  const handleToggleOrderBy = () => {
+    setOrderBy((prev) => (prev === 'asc' ? 'desc' : 'asc'));
+  };
+
+  const handleChangeSearchTerm = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   return (
     <S.Container>
-      <Loader />
+      {isLoading && <Loader isLoading={isLoading} />}
+
       <S.InputSearchContainer>
-        <S.InputSearch type="text" placeholder="Pesquisar pelo contato" />
+        <S.InputSearch
+          type="text"
+          placeholder="Pesquisar pelo contato"
+          onChange={handleChangeSearchTerm}
+          value={searchTerm}
+        />
       </S.InputSearchContainer>
       <S.Header>
-        <strong>3 Contatos</strong>
-        <Link href="/" alt="link">Novo contato</Link>
+        <strong>
+          {`${filteredContacts.length}
+             ${filteredContacts.length === 1 ? 'contato' : 'contatos'}`}
+        </strong>
+        <Link to="/new" alt="link">
+          Novo contato
+        </Link>
       </S.Header>
 
-      <S.ListContainer>
-        <header>
-          <button type="button" className="sort-button">
+      {filteredContacts.length > 0 && (
+        <S.ListHeader orderBy={orderBy}>
+          <button type="button" className="sort-button" onClick={handleToggleOrderBy}>
             <span>Nome</span>
             <img src={arrow} alt="arrow" />
           </button>
-        </header>
+        </S.ListHeader>
+      )}
 
-        <S.Card>
+      {filteredContacts.map((contact) => (
+        <S.Card key={contact.id}>
           <div className="info">
             <div className="contact-name">
-              <strong>Mateus Silva</strong>
-              <small>Instagram</small>
+              <strong>{contact.name}</strong>
+              {contact.category_name && <small>{contact.category_name}</small>}
             </div>
-            <span>mateus@devacademy.com.br</span>
-            <span>(33) 99999-9999</span>
+            <span>{contact.email}</span>
+            <span>{contact.phone}</span>
           </div>
           <div className="actions">
-            <Link to="/edit/123">
+            <Link to={`/edit/${contact.id}`}>
               <img src={edit} alt="editar" />
             </Link>
             <button type="button">
@@ -43,8 +94,7 @@ export default function Home() {
             </button>
           </div>
         </S.Card>
-
-      </S.ListContainer>
+      ))}
     </S.Container>
   );
 }

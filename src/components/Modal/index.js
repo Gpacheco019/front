@@ -11,8 +11,12 @@ export default function Modal({ danger }) {
         <p>Conteúdo do modal</p>
 
         <S.Footer>
-          <button type="button" className="cancel-button">Cancelar</button>
-          <Button type="button" danger={danger}>Confirmar</Button>
+          <button type="button" className="cancel-button">
+            Cancelar
+          </button>
+          <Button type="button" danger={danger}>
+            Confirmar
+          </Button>
         </S.Footer>
       </S.Container>
     </S.Overlay>,

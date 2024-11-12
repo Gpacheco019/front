@@ -1,5 +1,4 @@
 export default {
-
   colors: {
     neutral: {
       white: '#ffffff',

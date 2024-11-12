@@ -5,7 +5,6 @@ export default function Header() {
   return (
     <S.Container>
       <img src={logo} alt="MyContact-logo" width="201" />
-
     </S.Container>
   );
 }

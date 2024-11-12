@@ -13,7 +13,7 @@ export const Header = styled.header`
   strong {
     color: ${({ theme }) => theme.colors.neutral.black};
     font-size: 24px;
-  };
+  }
 
   a {
     color: ${({ theme }) => theme.colors.primary.darkBlue};
@@ -31,22 +31,25 @@ export const Header = styled.header`
   }
 `;
 
-export const ListContainer = styled.div`
+export const ListHeader = styled.header`
   margin-top: 24px;
+  margin-bottom: 8px;
 
-  header {
-    margin-bottom: 8px;
-    .sort-button {
-      background-color: transparent;
-      border: none;
-      display: flex;
-      align-items: center;
+  button {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
 
-      span {
-        color: ${({ theme }) => theme.colors.primary.darkBlue};
-        font-weight: bold;
-        margin-right: 8px;
-      }
+    span {
+      color: ${({ theme }) => theme.colors.primary.darkBlue};
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    img {
+      transform: ${({ orderBy }) => (orderBy === 'asc' ? 'rotate(180deg)' : 'rotate(0deg)')};
+      transition: transform 0.2s ease-in;
     }
   }
 `;
@@ -64,45 +67,44 @@ export const Card = styled.div`
     margin-top: 16px;
   }
 
-
-    .info {
-      .contact-name {
-        strong {
-          color: ${({ theme }) => theme.colors.neutral.black};
-          font-size: 18px;
-        }
-
-        small {
-          background: ${({ theme }) => theme.colors.primary.lightBlue};
-          color: ${({ theme }) => theme.colors.primary.darkBlue};
-          font-weight: bold;
-          text-transform: uppercase;
-          padding: 4px;
-          border-radius: 4px;
-          margin-left: 8px;
-        }
+  .info {
+    .contact-name {
+      strong {
+        color: ${({ theme }) => theme.colors.neutral.black};
+        font-size: 18px;
       }
 
-      span {
-        display: block;
-        color: ${({ theme }) => theme.colors.neutral.grey};
-        font-size: 14px;
+      small {
+        background: ${({ theme }) => theme.colors.primary.lightBlue};
+        color: ${({ theme }) => theme.colors.primary.darkBlue};
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 4px;
+        border-radius: 4px;
+        margin-left: 8px;
       }
     }
 
-    .actions {
-      display: flex;
-      align-items: center;
-
-      a {
-        margin-right: 8px;
-      }
-
-      button {
-        background-color: transparent;
-        border: none;
-      }
+    span {
+      display: block;
+      color: ${({ theme }) => theme.colors.neutral.grey};
+      font-size: 14px;
     }
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+
+    a {
+      margin-right: 8px;
+    }
+
+    button {
+      background-color: transparent;
+      border: none;
+    }
+  }
 `;
 
 export const InputSearchContainer = styled.div`
@@ -120,10 +122,9 @@ export const InputSearch = styled.input`
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.neutral.grey};
-  };
+  }
 
   &:focus {
     color: ${({ theme }) => theme.colors.primary.mainBlue};
-  };
-
+  }
 `;
