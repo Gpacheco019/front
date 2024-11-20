@@ -7,8 +7,12 @@ export const Container = styled.div`
 export const Header = styled.header`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: ${({ $hasError }) =>
+    $hasError ? 'flex-end' : 'space-between'};
   margin-top: 32px;
+
+  border-bottom: 2px solid ${({ theme }) => theme.colors.neutral.extraLightGrey};
+  padding-bottom: 16px;
 
   strong {
     color: ${({ theme }) => theme.colors.neutral.black};
@@ -127,5 +131,22 @@ export const InputSearch = styled.input`
 
   &:focus {
     color: ${({ theme }) => theme.colors.primary.mainBlue};
+  }
+`;
+
+export const ErrorContainer = styled.div`
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+
+  .details {
+    margin-left: 24px;
+
+    strong {
+      color: ${({ theme }) => theme.colors.danger.main};
+      font-size: 22px;
+      display: block;
+      margin-bottom: 8px;
+    }
   }
 `;

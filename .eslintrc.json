@@ -19,6 +19,7 @@
   "plugins": ["react", "prettier", "react-hooks"],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
+    "class-methods-use-this": "off",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/react-in-jsx-scope": "off",

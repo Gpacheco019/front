@@ -6,6 +6,7 @@ export default {
       darkGrey: '#7a7a7a',
       grey: '#bcbcbc',
       lightGrey: '#e6e6e6',
+      extraLightGrey: '#e5e5e5',
     },
     primary: {
       darkestBlue: '#3346F0',
